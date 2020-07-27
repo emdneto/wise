@@ -110,7 +110,7 @@ class pcpe_metrics_collector:
         print("JSON body builded, printing:")
         print(jsonData)
         print("Making HTTP Post requisition to http://10.7.229.85:8089/necos/wscagent/ssid/update")
-        requestResponse = requests.post('http://10.7.229.85:8089/necos/wscagent/ssid/update', Jsonrequest)
+        response = requests.post('http://10.7.229.85:8089/necos/wscagent/ssid/update', Jsonrequest)
         print("Requisition made...")
         print("Request reponse status code: ", response.status_code)
         print("Printing Entire Post Request")
