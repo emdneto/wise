@@ -35,7 +35,7 @@ class Focus:
         self.log = logging.getLogger('focus')
         self.collectTime = 10
         self.treshold = 10
-        self.total_band = 5
+        self.total_band = 50
         self.changed = False
 
     def start(self):
