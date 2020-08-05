@@ -33,7 +33,7 @@ class Focus:
         self.run = True
         self.collect = 1
         self.log = logging.getLogger('focus')
-        self.collectTime = 10
+        self.collectTime = 1
         self.treshold = 10
         self.total_band = 5000
         self.changed = False
@@ -92,6 +92,7 @@ class Focus:
                         #print('revert')
                         self.changed = False
                         self.revertDefault()
+                        self.log.info("Learning WiFi-Slice instances.")
                         
                     if "0" in self.pvt_interface_stations_num:
                         #self.log.info("Zero active stations. Storing occurrence.")
@@ -142,8 +143,8 @@ class Focus:
         pubRate = self.total_band * 0.8
         pvtRate = self.total_band * 0.2
 
-        pubBurst = 0.8 * 1048576
-        pvtBurst = 0.2 * 1048576
+        pubBurst = 0 #0.8 * 1048576
+        pvtBurst = 0 #0.2 * 1048576
 
         Jsonrequest = {
             "slice_id": 1,
@@ -164,7 +165,7 @@ class Focus:
         #   "Making HTTP Post request to http://10.7.229.85:8089/necos/wscagent/ssid/update")
         newHeaders = {'Content-type': 'application/json'}
         response = requests.post(
-            'http://10.7.229.85:8089/necos/wscagent/ssid/update', Jsonrequest, headers=newHeaders)
+            'http://10.7.229.85:8089/necos/wscagent/ssid/update', jsonData, headers=newHeaders)
         #self.log.info("Request reponse status code: ", response.status_code)
         #self.log.info(response.json())
 
@@ -174,8 +175,8 @@ class Focus:
         pubRate = self.total_band * 0.2
         pvtRate = self.total_band * 0.8
 
-        pubBurst = 0.2 * 1048576
-        pvtBurst = 0.8 * 1048576
+        pubBurst = 0 #0.8 * 1048576
+        pvtBurst = 0 #0.2 * 1048576
 
         Jsonrequest = {
             "slice_id": 1,
@@ -196,7 +197,11 @@ class Focus:
         #    "Making HTTP Post request default to http://10.7.229.85:8089/necos/wscagent/ssid/update")
         newHeaders = {'Content-type': 'application/json'}
         response = requests.post(
-            'http://10.7.229.85:8089/necos/wscagent/ssid/update', Jsonrequest, headers=newHeaders)
+            'http://10.7.229.85:8089/necos/wscagent/ssid/update', jsonData, headers=newHeaders)
+        
+        self.log.info("Matched WiFi-Slice Threshold.")
+        self.log.info("Executing FOCUS WiFi-Slice Elasticity.")
+        self.log.info("FOCUS WiFi-Slice Elasticity Successfully Accomplished!")
         #self.log.info("Request reponse status code: ", response.status_code)
         #self.log.info(response.json())
 
