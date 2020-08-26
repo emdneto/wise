@@ -34,11 +34,12 @@ class Focus:
         self.collect = 1
         self.log = logging.getLogger('focus')
         self.collectTime = 1
-        self.treshold = 10
+        self.treshold = 2
         self.total_band = 5000
         self.changed = False
 
     def start(self):
+        self.log.info('='*50)
         self.log.info('Starting FOCUS WiFi-Slice Monitoring Service.')
         self.log.info('Learning WiFi-Slice instances.')
         #self.log.info('Collecting data from http://10.7.227.130:9100/metrics...')
@@ -92,6 +93,7 @@ class Focus:
                         #print('revert')
                         self.changed = False
                         self.revertDefault()
+                        self.log.info('='*50)
                         self.log.info("Learning WiFi-Slice instances.")
                         
                     if "0" in self.pvt_interface_stations_num:
@@ -135,6 +137,7 @@ class Focus:
         self.requestChanges()
         self.log.info("FOCUS WiFi-Slice Elasticity Successfully Accomplished!")
         time.sleep(1)
+        self.log.info('='*50)
         self.log.info("Learning WiFi-Slice instances.")
 
     def requestChanges(self):
